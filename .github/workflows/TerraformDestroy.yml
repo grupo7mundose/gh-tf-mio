@@ -6,10 +6,20 @@ jobs:
  tf-destroy:
    runs-on: ubuntu-latest
    env:
+      TERRAFORM_VERSION: "1.6.5"
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_REGION: 'us-east-1'
    steps:
+     - uses: actions/checkout@v1
+     - name: Verify Terraform version
+       run: terraform --version
+     - name: Terraform init
+       env:
+         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+         AWS_REGION: 'us-east-1'
+       run: terraform init -input=false
      - name: Terraform destroy
        id: destroy
-       run: terraform destroy -auto-approved
+       run: terraform destroy --auto-approve
