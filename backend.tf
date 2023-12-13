@@ -1,9 +1,8 @@
 terraform {
   backend "s3"{
-    bucket                 = "mundose222"
+    bucket                 = "grupo7bucket"
     region                 = "us-east-1"
-    key                    = "backend.tfstate"
-    dynamodb_table         = "terraformstatelock"
+    key                    = "pin2/backend.tfstate"
+    dynamodb_table         = "grupo7terraformstatelock"
   }
 }
-
